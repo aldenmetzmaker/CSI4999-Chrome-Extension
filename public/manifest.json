@@ -1,12 +1,12 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Extension Name",
   "version": "0.1",
   "description": "Some Description",
   "permissions": [
   ],
   "background": {
-    "scripts": ["static/js/background.js"]
+    "service_worker": "static/js/background.js"
   },
   "content_scripts": [{
     "js": [ "static/js/content.js" ],
@@ -17,7 +17,7 @@
   "icons": {
     "192": "logo192.png"
   },
-  "browser_action": {
+  "action": {
     "default_icon": {
       "192": "logo192.png"
     },

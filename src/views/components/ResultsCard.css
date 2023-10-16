@@ -1,0 +1,23 @@
+/* ResultsCard.css */
+.results-card {
+    width: 400px;
+    padding: 16px;
+    margin-right: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    opacity: 0.9;
+    border-radius: 25px;
+    margin-bottom: 20px;
+  }
+  
+  .card-title {
+    color: #e8fff1;
+    margin-bottom: 8px;
+  }
+  
+  .card-text {
+    opacity: none;
+    font-size: 14px;
+    color: #e8fff1;
+  }
+  
