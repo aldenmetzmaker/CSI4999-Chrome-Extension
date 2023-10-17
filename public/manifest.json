@@ -4,6 +4,7 @@
   "version": "0.1",
   "description": "Some Description",
   "permissions": [
+    "activeTab"
   ],
   "background": {
     "service_worker": "static/js/background.js"
@@ -11,7 +12,7 @@
   "content_scripts": [{
     "js": [ "static/js/content.js" ],
     "matches": [
-      "http://*.example.com/*", "https://*.example.com/*"
+       "https://www.youtube.com/*"
     ]
   }],
   "icons": {
