@@ -8,7 +8,7 @@ function extractVideoIdAndValidate(url) {
         // Valid YouTube URL, return ID
         return match[1];
     } else {
-        // Invalid, url return null
+        // Invalid url, return null
         return null;
     }
 }
