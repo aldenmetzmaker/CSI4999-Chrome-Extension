@@ -1,2 +1,5 @@
-console.log('Hello Content');
+chrome.runtime.addListener(() => {
+    console.log('content!');
+    return;
+  });
 export {}
