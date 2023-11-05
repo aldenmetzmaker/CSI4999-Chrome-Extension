@@ -7,10 +7,10 @@
     "activeTab"
   ],
   "background": {
-    "service_worker": "static/js/background.js"
+    "service_worker": "service_worker.js"
   },
   "content_scripts": [{
-    "js": [ "static/js/content.js" ],
+    "js": [ "content.js" ],
     "matches": [
        "https://www.youtube.com/*"
     ]
