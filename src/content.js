@@ -1,5 +1,3 @@
-chrome.runtime.addListener(() => {
-    console.log('content!');
-    return;
-  });
+chrome.runtime.sendMessage({requestCurrentURL: true});
+
 export {}
