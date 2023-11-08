@@ -1,37 +1,3 @@
-
-
-//   function extractVideoIdAndValidate(url) {
-//     const youtubeUrlPattern = /^https:\/\/(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)$/;
-//     const match = url.match(youtubeUrlPattern);
-
-//     if (match) {
-//       // Valid YouTube URL, return ID
-//       return match[1];
-//     } else {
-//       // Invalid url, return null
-//       return null;
-//     }
-//   }
-
-//   const url = "https://www.youtube.com/watch?v=VNmdw9ZNr1I";
-//   const videoId = extractVideoIdAndValidate(url);
-//   console.log("url1", url);
-//   if (videoId) {
-//     console.log("Valid YouTube URL. Video ID: " + videoId);
-//   } else {
-//     console.log("Invalid YouTube URL.");
-//   }
-
-//   const url2 = "https://www.nopeeee.com/watch?v=aySX3E9txVw";
-//   const videoId2 = extractVideoIdAndValidate(url2);
-//   console.log("url2", url2);
-
-//   if (videoId2) {
-//     console.log("Valid YouTube URL. Video ID: " + videoId);
-//   } else {
-//     console.log("Invalid YouTube URL.");
-//   }
-
 // //Extract YouTube tags from API result snippet (We can also get the Video Title here):
 
 // //Determine which Youtube tag is most relevant (Possibly by matching with Video Title)
@@ -43,6 +9,11 @@
 
 // //Update Pop Up fields with the results of the query (possibly offer a search bar if 
 // //the app determines that an error occured)
+
+
+
+// TODO need to store the videoId in all cases. Right now only on next video/page visit
+// need to also save when tab is revisited when left playing
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.requestCurrentURL) {
       // Use chrome.scripting.executeScript to get the current URL
@@ -68,6 +39,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
       const videoId = url.searchParams.get("v");
       if (videoId) {
         console.log("Video ID has changed to: " + videoId);
+        chrome.storage.sync.set({ videoId }, function() {
+            console.log("Video ID has been stored.");
+        });
       }
     }
   });

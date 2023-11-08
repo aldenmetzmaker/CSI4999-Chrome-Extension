@@ -4,9 +4,10 @@
   "version": "0.1",
   "description": "Some Description",
   "permissions": [
-     "scripting",
-     "activeTab",
-     "webNavigation"
+    "storage",
+    "scripting",
+    "activeTab",
+    "webNavigation"
   ],
   "host_permissions": [
     "https://www.googleapis.com/*"
@@ -16,10 +17,10 @@
     "type": "module"
   },
   "content_scripts": [{
-    "js": [ "content.js" ],
-    "matches": ["*://www.youtube.com/watch?v=*"],
-    "run_at": "document_start"
-  }],
+      "js": [ "content.js" ],
+      "matches": ["*://www.youtube.com/watch?v=*"],
+      "run_at": "document_start"
+    }],
   "icons": {
     "192": "logo192.png"
   },

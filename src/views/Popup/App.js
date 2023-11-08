@@ -7,17 +7,25 @@ import youtube from '../../api/youtube.js'
 class App extends React.Component{
   state = {
     videos: [],
-    loading: false
+    loading: false,
+    videoId: null
   }
-  (async () => {
-    console.log('-1');
-    const response = await chrome.runtime.sendMessage('update')
-  
-    console.log('video ID: ', response)
-  })();
+  componentDidMount() {
+    chrome.storage.sync.get(["videoId"], function(result) {
+      const videoId = result.videoId;
+      console.log("Retrieved video ID: " + videoId);
+      
+      this.setState({ videoId: result.videoId });
+    }.bind(this));
+  }
   handleSubmit = async () => {
     this.setState({termFromSearchBar: "vue 3 skills"})
-    const response = await youtube.get('/videos', {})
+    const response = await youtube.get('/videos', {
+      params: {
+        id: this.state.videoId
+      }
+    })
+    console.log(this.state.videoId)
     this.setState({
       videos: response.data.items
     })

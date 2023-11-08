@@ -5,7 +5,7 @@ export default axios.create({
     baseURL: "https://www.googleapis.com/youtube/v3/",
     params: {
         part: 'snippet',
-        id: 'SqcY0GlETPk',
+        id: '',
         key: KEY
     }
 })
