@@ -4,17 +4,24 @@
   "version": "0.1",
   "description": "Some Description",
   "permissions": [
-    "activeTab"
+    "storage",
+    "scripting",
+    "activeTab",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://www.googleapis.com/*"
   ],
   "background": {
-    "service_worker": "service_worker.js"
+    "service_worker": "service_worker.js",
+    "type": "module"
   },
   "content_scripts": [{
-    "js": [ "content.js" ],
-    "matches": [
-       "https://www.youtube.com/*"
-    ]
-  }],
+      "js": [ "content.js" ],
+      "matches": ["*://www.youtube.com/watch?v=*"],
+      "run_at": "document_start",
+      "type": "module"
+    }],
   "icons": {
     "192": "logo192.png"
   },
