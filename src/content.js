@@ -1,2 +1,3 @@
-console.log('Hello Content');
+chrome.runtime.sendMessage({requestCurrentURL: true});
+
 export {}
