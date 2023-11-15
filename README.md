@@ -1,6 +1,10 @@
 ## Development Instructions
 in your terminal (make sure you are in project directory), run:
 
+### `npm install`
+
+installs all dependencies for the project
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
