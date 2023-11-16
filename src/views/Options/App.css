@@ -1,5 +1,8 @@
 body {
   /* Define global body styles if needed. */
+  position: relative;
+  color: #f4f4f4;
+  margin: none;
 }
 
 .options {
@@ -13,8 +16,6 @@ body {
 
 .options-header {
   min-height: 100px; /* Set a fixed height for the header */
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .theme-form {
@@ -25,6 +26,7 @@ body {
 /* Light Theme Styles */
 .options.light {
   background-color: #f4f4f4;
+  color: #333;
 }
 
 .options-header.light {
@@ -33,11 +35,11 @@ body {
 }
 
 .section-title.light {
-  color: #333; 
+  color: #333;
 }
 
 .options.dark {
-  background-color: #333; 
+  background-color: #333;
 }
 
 .options-header.dark {
@@ -46,5 +48,9 @@ body {
 }
 
 .section-title.dark {
-  color: #333; 
+  color: #f4f4f4;
+}
+
+.options-prompts {
+  text-align: center;
 }

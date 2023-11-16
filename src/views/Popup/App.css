@@ -1,4 +1,4 @@
-.popup{
+.popup {
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -6,17 +6,18 @@
   width: 600px;
   background-color: #3d4851;
   color: white;
-  overflow-y: auto;
+  overflow-x: hidden;
 }
-.search-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  height:auto;
-  border-right: 1px solid white;
+.popup-header {
+  display: inline-flex;
+  border-radius: 15px;
+  margin: 5px;
+  justify-content: space-between;
+}
+
+.options-page-button {
+  height: 50%;
+  margin: 3%;
 }
 .input-wrapper {
   display: flex;
@@ -37,13 +38,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  height: auto;
 }
 .recommended-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 15px;
-
 }
 .quick-search-container {
   display: flex;
@@ -53,4 +56,5 @@
 .title-text {
   margin-top: 0;
   margin-bottom: 5px;
+  font-size: larger;
 }
