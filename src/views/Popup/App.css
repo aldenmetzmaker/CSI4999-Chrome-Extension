@@ -18,12 +18,15 @@
 .logo {
   max-height: 80%;
   max-width: 80%;
+  background: transparent;
 }
 
 .options-page-button {
   height: 60%;
   margin: 3%;
   width: 10%;
+  background: transparent;
+  border: none;
 }
 
 .options-page-button:hover {
