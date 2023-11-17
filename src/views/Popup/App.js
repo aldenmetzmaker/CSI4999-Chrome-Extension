@@ -66,6 +66,13 @@ class App extends React.Component {
       );
     });
   }
+  handleOptionsPageClick = () => {
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else {
+      window.open(chrome.runtime.getURL('options.html'));
+    }
+  };
   // TODO may need function in the future
   handleSubmit = async () => {
     // probably will replace with a message to service worker, and handle requests from there
@@ -86,7 +93,7 @@ class App extends React.Component {
       <div className="popup">
         <header className="popup-header">
           <h1> Click Search - A React Extension</h1>
-          <button className="options-page-button">
+          <button onClick={this.handleOptionsPageClick} className="options-page-button">
             <img src="../../../logo193.png" alt="logo" class="logo"></img>
           </button>
         </header>
