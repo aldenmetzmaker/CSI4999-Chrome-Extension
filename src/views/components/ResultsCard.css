@@ -8,8 +8,12 @@
     opacity: 0.9;
     border-radius: 25px;
     margin-bottom: 20px;
+    transition: transform 0.1s ease-in-out 0.1s;
   }
-  
+  .results-card:hover {
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+  }
   .card-title {
     color: #e8fff1;
     margin-bottom: 8px;

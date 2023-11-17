@@ -96,22 +96,18 @@ class App extends React.Component {
         {!this.state.loading ? (
           <div className="results">
             <ResultsCard
-              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
-              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
-              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
-              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />

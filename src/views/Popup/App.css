@@ -58,11 +58,6 @@
   height: auto;
 }
 
-.results-card:hover {
-  transform: scale(1.05, 1.05);
-  cursor: pointer;
-}
-
 .recommended-wrapper {
   display: flex;
   flex-direction: column;
