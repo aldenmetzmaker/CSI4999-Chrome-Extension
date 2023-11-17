@@ -10,7 +10,7 @@ import "./App.css";
 // the example now with toggle theme shows how to dynamically set css classes
 function App() {
   // state variable declaration [variableName, set function]
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
 
   // gets called when input element is changed, and updates state. this dynamically sets the css class
   const toggleTheme = () => {

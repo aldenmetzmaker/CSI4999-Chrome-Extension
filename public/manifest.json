@@ -25,7 +25,10 @@
     "default_icon": {
       "192": "logo192.png"
     },
-    "default_title": "Popup",
+    "secondary_icon": {
+      "193": "logo193.png"
+    },
+    "default_title": "Extension - Click Search",
     "default_popup": "popup.html"
   },
   "options_ui": {

@@ -16,6 +16,7 @@ body {
 
 .options-header {
   min-height: 100px; /* Set a fixed height for the header */
+  font-size: xx-large;
 }
 
 .theme-form {

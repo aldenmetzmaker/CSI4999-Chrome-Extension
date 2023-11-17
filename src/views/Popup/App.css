@@ -15,10 +15,21 @@
   justify-content: space-between;
 }
 
-.options-page-button {
-  height: 50%;
-  margin: 3%;
+.logo {
+  max-height: 80%;
+  max-width: 80%;
 }
+
+.options-page-button {
+  height: 60%;
+  margin: 3%;
+  width: 10%;
+}
+
+.options-page-button:hover {
+  cursor: pointer;
+}
+
 .input-wrapper {
   display: flex;
   flex-direction: row;
@@ -33,6 +44,10 @@
   background-color: #404040;
   border: none;
 }
+.title-text {
+  margin-left: 5px;
+}
+
 .results {
   display: flex;
   flex-direction: column;
@@ -42,6 +57,12 @@
   height: 100%;
   height: auto;
 }
+
+.results-card:hover {
+  transform: scale(1.05, 1.05);
+  cursor: pointer;
+}
+
 .recommended-wrapper {
   display: flex;
   flex-direction: column;

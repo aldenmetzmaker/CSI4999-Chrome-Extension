@@ -87,26 +87,31 @@ class App extends React.Component {
         <header className="popup-header">
           <h1> Click Search - A React Extension</h1>
           <button className="options-page-button">
-            {" "}
-            <a href="src\views\Options\App.css">Options</a>
+            <img src="../../../logo193.png" alt="logo" class="logo"></img>
           </button>
         </header>
-        <h2 className="title-text">{this.state.videoTitle}</h2>
+        <h2 className="title-text">
+          Showing Results For: {this.state.videoTitle}
+        </h2>
         {!this.state.loading ? (
           <div className="results">
             <ResultsCard
+              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
+              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
+              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
             <ResultsCard
+              className="results-card"
               title="Sample Title"
               text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget turpis nec mauris commodo interdum."
             />
