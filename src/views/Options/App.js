@@ -34,9 +34,24 @@ function App() {
         <h2>Configure Prompts</h2>
         <section className="prompts-pre-set">
           <h2>Filter by Category:</h2>
+          <section className="prompts-input">
+          <input type="radio" id="people"></input>
+          <label for="people">People</label>
+          <input type="radio" id="movies-tv"></input>
+          <label for="movies-tv">Movies/TV</label>
+          <input type="radio" id="technology"></input>
+          <label for="technology">Technology</label>
+          <input type="radio" id="video-games"></input>
+          <label for="video-games">Video Games</label>
+          <input type="radio" id="history"></input>
+          <label for="history">History</label>
+          <input type="radio" id="any"></input>
+          <label for="any">Any</label>
+          </section>
         </section>
-        <section className="prompts-user-set"></section>
-        <h2>Set Custom Prompts:</h2>
+        <section className="prompts-user-set">
+          <h2>Set Custom Prompts:</h2>
+        </section>
       </section>
     </div>
   );

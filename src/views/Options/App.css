@@ -13,6 +13,7 @@ body {
   width: 1000px;
   padding: 15px;
   overflow-y: scroll;
+  height: fit-content;
 }
 
 .options-header {
@@ -59,4 +60,8 @@ body {
 /* label? */
 .options-prompts {
   text-align: center;
+}
+
+.prompts-input {
+  font-size: larger;
 }
