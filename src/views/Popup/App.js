@@ -70,7 +70,7 @@ class App extends React.Component {
     if (chrome.runtime.openOptionsPage) {
       chrome.runtime.openOptionsPage();
     } else {
-      window.open(chrome.runtime.getURL('options.html'));
+      window.open(chrome.runtime.getURL("options.html"));
     }
   };
   // TODO may need function in the future
@@ -92,8 +92,11 @@ class App extends React.Component {
     return (
       <div className="popup">
         <header className="popup-header">
-          <h1> Click Search - A React Extension</h1>
-          <button onClick={this.handleOptionsPageClick} className="options-page-button">
+          <h1>Click Search - A React Extension</h1>
+          <button
+            onClick={this.handleOptionsPageClick}
+            className="options-page-button"
+          >
             <img src="../../../logo193.png" alt="logo" class="logo"></img>
           </button>
         </header>
