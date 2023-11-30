@@ -1,4 +1,4 @@
-const KEY = "AIzaSyCudj37bf7-uNT8tYA1GscfijHf-dRlfs4";
+const KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 // //Extract YouTube tags from API result snippet (We can also get the Video Title here):
 
 // //Determine which Youtube tag is most relevant (Possibly by matching with Video Title)
