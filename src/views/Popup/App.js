@@ -75,17 +75,22 @@ class App extends React.Component {
   };
   // TODO may need function in the future
   handleSubmit = async () => {
-    // probably will replace with a message to service worker, and handle requests from there
-    // const response = await youtube.get('/videos', {
-    //   params: {
-    //     id: this.state.videoId
-    //   }
-    // })
-    // console.log(this.state.videoId)
-    // this.setState({
-    //   videos: response.data.items,
-    // })
-    // console.log(this.state.videos);
+    this.setState({ loading: true }); // Set loading state to true before making the request
+  
+    try {
+      // Simulating an asynchronous operation (replace this with your actual API request)
+      const response = await PUTAPIREQUESTHERE(); // HANDLE THE API REQUEST HERE
+  
+      // Once the API request is completed, update the state with the response
+      this.setState({
+        videos: response.data.items,
+        loading: false, // Set loading to false after getting the response
+      });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle errors if the API request fails
+      this.setState({ loading: false });
+    }
   };
 
   render() {
@@ -123,7 +128,12 @@ class App extends React.Component {
             />
           </div>
         ) : (
-          "TODO insert loading indicator here"
+          <div class="loading">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+          </div>
         )}
       </div>
     );
