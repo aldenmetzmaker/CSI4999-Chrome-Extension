@@ -76,11 +76,23 @@ h2 {
 .filter-item {
   cursor: pointer;
   padding: 10px;
-    border: 1px solid;
-    margin: 10px;
+  border: 1px solid;
+  margin: 10px;
+  transition: transform 0.2s ease-in-out; 
 }
+.filter-item:hover {
+  transform: translateY(-3px);
+}
+
+
 /* Other Theme Styles */
 
+.prompts-user-set{
+  padding: 15px 50px;
+  border-radius: 15px;
+  box-shadow: 1px 1px 9px rgba(52,152,219,.7);
+  margin-top: 25px;
+}
 /* label? */
 /* .options-prompts {
   text-align: center;
