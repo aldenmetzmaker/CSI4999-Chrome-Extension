@@ -1,4 +1,4 @@
-const KEY = "AIzaSyCudj37bf7-uNT8tYA1GscfijHf-dRlfs4";
+const KEY = process.env.REACT_APP_YOUTUBE_API_KEY;
 // //Extract YouTube tags from API result snippet (We can also get the Video Title here):
 
 // //Determine which Youtube tag is most relevant (Possibly by matching with Video Title)
@@ -38,8 +38,14 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
         })
         .then(keyTag => { 
           chrome.storage.local.get(["apiResponse"]).then((result) => {
-            keyTag = tagAlgorithm(result.apiResponse[0].snippet.tags, result.apiResponse[0].snippet.title);
-            console.log("Response from tagAlgorithm", keyTag);
+            // only call tagalgo if tags exist
+            if (result.apiResponse[0].snippet.tags){
+              keyTag = tagAlgorithm(result.apiResponse[0].snippet.tags, result.apiResponse[0].snippet.title);
+              console.log("Response from tagAlgorithm", keyTag);
+            }
+            else {
+              // need to add functionality for when no tags are present. video title, video description? something to put it the openai request
+            }
           })
         })
         .catch(error => {
