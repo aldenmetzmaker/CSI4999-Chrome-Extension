@@ -3,13 +3,17 @@
     width: 400px;
     padding: 16px;
     margin-right: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to bottom, #3d4851, #394045);
     opacity: 0.9;
     border-radius: 25px;
     margin-bottom: 20px;
+    transition: transform 0.1s ease-in-out 0.1s;
   }
-  
+  .results-card:hover {
+    transform: scale(1.05, 1.05);
+    cursor: pointer;
+  }
   .card-title {
     color: #e8fff1;
     margin-bottom: 8px;
