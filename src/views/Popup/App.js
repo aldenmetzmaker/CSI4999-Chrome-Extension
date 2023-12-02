@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import ResultsCard from "../components/ResultsCard";
-// import youtube from '../../api/youtube.js' <- replacing with requests from service worker
+import generateChatCompletion from '../../api/openaiApi.js';
 
 class App extends React.Component {
   state = {
@@ -10,6 +10,8 @@ class App extends React.Component {
     videoId: null,
     videoData: null,
     videoTitle: null,
+    prompt: null,
+    openAIResponse: null,
   };
   // will eventually remove the console logs, but are there now for testing
   // view them by inspecting the popup
@@ -73,19 +75,18 @@ class App extends React.Component {
       window.open(chrome.runtime.getURL("options.html"));
     }
   };
-  // TODO may need function in the future
-  handleSubmit = async () => {
-    // probably will replace with a message to service worker, and handle requests from there
-    // const response = await youtube.get('/videos', {
-    //   params: {
-    //     id: this.state.videoId
-    //   }
-    // })
-    // console.log(this.state.videoId)
-    // this.setState({
-    //   videos: response.data.items,
-    // })
-    // console.log(this.state.videos);
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const prompt = 'say this is a test';
+    let completion
+    try {
+       completion = await generateChatCompletion(prompt);
+       this.setState({openAIResponse: completion})
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    console.log(completion);
   };
 
   render() {
@@ -102,7 +103,10 @@ class App extends React.Component {
         </header>
         <h2 className="title-text">
           Showing Results For: {this.state.videoTitle}
-        </h2>
+        </h2>          
+        <button
+            onClick={this.handleSubmit}
+          >send openai request</button>
         {!this.state.loading ? (
           <div className="results">
             <ResultsCard

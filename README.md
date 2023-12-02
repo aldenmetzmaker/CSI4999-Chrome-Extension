@@ -15,3 +15,12 @@ Each time you add code and want to test, build again and click the refresh butto
 whenever errors occur in the extension, clear them before refreshing the extension
 
 
+### Create .env file
+
+create a .env file at the root of the project. inside of the file assign the following environment variables: <br />
+REACT_APP_OPENAI_API_KEY="PLACE KEY HERE"
+REACT_APP_YOUTUBE_API_KEY="PLACE KEY HERE" <br />
+<br />
+.env files are ignored by git via .gitignore, do not edit that file
+
+
