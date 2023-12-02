@@ -118,62 +118,64 @@ function App() {
       <section className="options-prompts">
         <h2>Configure Prompts</h2>
         <section className="prompts-pre-set">
-          <h3>Filter by Category:</h3>
-          <span onClick={() => showForm('people')} className="filter-item">People</span>
-          <span onClick={() => showForm('videoGames')} className="filter-item">Video Games</span>
-          <span onClick={() => showForm('movies')} className="filter-item">Movies/TV</span>
-          <span onClick={() => showForm('any')} className="filter-item">Any</span>
-          <span onClick={() => showForm('tech')} className="filter-item">Technology</span>
+          <h3 className="category-select-h3">Select a Category:</h3>
+          <div className="category-select-wrapper">
+            <span onClick={() => showForm('people')} className="filter-item">People</span>
+            <span onClick={() => showForm('videoGames')} className="filter-item">Video Games</span>
+            <span onClick={() => showForm('movies')} className="filter-item">Movies/TV</span>
+            <span onClick={() => showForm('any')} className="filter-item">Any</span>
+            <span onClick={() => showForm('tech')} className="filter-item">Technology</span>
+          </div>
         </section>
         {formToShow === 'people' && (
-        <QuestionInputForm
-          preferredQuestions={preferredQuestions.peopleQuestions}
-          handleInputChange={handleInputChange}
-          saveQuestions={saveQuestions}
-          clearQuestions={clearQuestions}
-          sectionName={'peopleQuestions'}
-          title={'People'}
-        />
+          <QuestionInputForm
+            preferredQuestions={preferredQuestions.peopleQuestions}
+            handleInputChange={handleInputChange}
+            saveQuestions={saveQuestions}
+            clearQuestions={clearQuestions}
+            sectionName={'peopleQuestions'}
+            title={'People'}
+          />
         )}
         {formToShow === 'tech' && (
-        <QuestionInputForm
-          preferredQuestions={preferredQuestions.techQuestions}
-          handleInputChange={handleInputChange}
-          saveQuestions={saveQuestions}
-          clearQuestions={clearQuestions}
-          sectionName={'techQuestions'}
-          title={'Technology'}
-        />
+          <QuestionInputForm
+            preferredQuestions={preferredQuestions.techQuestions}
+            handleInputChange={handleInputChange}
+            saveQuestions={saveQuestions}
+            clearQuestions={clearQuestions}
+            sectionName={'techQuestions'}
+            title={'Technology'}
+          />
         )}
         {formToShow === 'movies' && (
-        <QuestionInputForm
-          preferredQuestions={preferredQuestions.movieQuestions}
-          handleInputChange={handleInputChange}
-          saveQuestions={saveQuestions}
-          clearQuestions={clearQuestions}
-          sectionName={'movieQuestions'}
-          title={'Movies/TV'}
-        />
+          <QuestionInputForm
+            preferredQuestions={preferredQuestions.movieQuestions}
+            handleInputChange={handleInputChange}
+            saveQuestions={saveQuestions}
+            clearQuestions={clearQuestions}
+            sectionName={'movieQuestions'}
+            title={'Movies/TV'}
+          />
         )}
         {formToShow === 'videoGames' && (
-        <QuestionInputForm
-          preferredQuestions={preferredQuestions.videoGameQuestions}
-          handleInputChange={handleInputChange}
-          saveQuestions={saveQuestions}
-          clearQuestions={clearQuestions}
-          sectionName={'videoGameQuestions'}
-          title={'Video Games'}
-        />
+          <QuestionInputForm
+            preferredQuestions={preferredQuestions.videoGameQuestions}
+            handleInputChange={handleInputChange}
+            saveQuestions={saveQuestions}
+            clearQuestions={clearQuestions}
+            sectionName={'videoGameQuestions'}
+            title={'Video Games'}
+          />
         )}
         {formToShow === 'any' && (
-        <QuestionInputForm
-          preferredQuestions={preferredQuestions.anyQuestions}
-          handleInputChange={handleInputChange}
-          saveQuestions={saveQuestions}
-          clearQuestions={clearQuestions}
-          sectionName={'anyQuestions'}
-          title={'Any'}
-        />
+          <QuestionInputForm
+            preferredQuestions={preferredQuestions.anyQuestions}
+            handleInputChange={handleInputChange}
+            saveQuestions={saveQuestions}
+            clearQuestions={clearQuestions}
+            sectionName={'anyQuestions'}
+            title={'Any'}
+          />
         )}
         {showSaved ? (<span>Saved successfully</span>) : ('')}
       </section>

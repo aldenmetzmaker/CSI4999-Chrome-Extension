@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import ResultsCard from "../components/ResultsCard";
-// import youtube from '../../api/youtube.js' <- replacing with requests from service worker
+import generateChatCompletion from '../../api/openaiApi.js';
 
 class App extends React.Component {
   state = {
@@ -10,6 +10,8 @@ class App extends React.Component {
     videoId: null,
     videoData: null,
     videoTitle: null,
+    prompt: null,
+    openAIResponse: null,
   };
   // will eventually remove the console logs, but are there now for testing
   // view them by inspecting the popup
@@ -73,24 +75,18 @@ class App extends React.Component {
       window.open(chrome.runtime.getURL("options.html"));
     }
   };
-  // TODO may need function in the future
-  handleSubmit = async () => {
-    this.setState({ loading: true }); // Set loading state to true before making the request
-  
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const prompt = 'say this is a test';
+    let completion
     try {
-      // Simulating an asynchronous operation (replace this with your actual API request)
-      const response = await PUTAPIREQUESTHERE(); // HANDLE THE API REQUEST HERE
-  
-      // Once the API request is completed, update the state with the response
-      this.setState({
-        videos: response.data.items,
-        loading: false, // Set loading to false after getting the response
-      });
+       completion = await generateChatCompletion(prompt);
+       this.setState({openAIResponse: completion})
     } catch (error) {
-      console.error('Error fetching data:', error);
-      // Handle errors if the API request fails
-      this.setState({ loading: false });
+      console.error('Error:', error);
     }
+    console.log(completion);
   };
 
   render() {
@@ -107,7 +103,10 @@ class App extends React.Component {
         </header>
         <h2 className="title-text">
           Showing Results For: {this.state.videoTitle}
-        </h2>
+        </h2>          
+        <button
+            onClick={this.handleSubmit}
+          >send openai request</button>
         {!this.state.loading ? (
           <div className="results">
             <ResultsCard
