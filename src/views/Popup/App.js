@@ -127,7 +127,12 @@ class App extends React.Component {
             />
           </div>
         ) : (
-          "TODO insert loading indicator here"
+          <div class="loading">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+          </div>
         )}
       </div>
     );
