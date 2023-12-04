@@ -41,6 +41,11 @@ h1 {
   cursor: pointer;
 }
 
+.title-text {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
 .input-wrapper {
   display: flex;
   flex-direction: row;
@@ -153,19 +158,37 @@ h1 {
 }
 
 @-webkit-keyframes loadingFade {
-  0% { opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @-moz-keyframes loadingFade {
-  0% { opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes loadingFade {
-  0% { opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+  }
 }
