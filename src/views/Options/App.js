@@ -16,26 +16,26 @@ function App() {
   const [showSaved, setShowSaved] = useState(false);
   const [formToShow, setFormToShow] = useState("");
   const [preferredQuestions, setPreferredQuestions] = useState({
-    peopleQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
+    contentCreatorQuestions: {
+      questionOne: "How long have they been a content creator?",
+      questionTwo: "Do they have any other channels?",
+      questionThree: "Do they stream?",
+      questionFour: "Do they have social media handles?",
+      questionFive: "What topics do they typcially make videos on?",
     },
     movieQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
+      questionOne: "When did this movie come out?",
+      questionTwo: "Who directed and produced this movie?",
+      questionThree: "Was this a box office success?",
+      questionFour: "What did the audience think of this movie?",
+      questionFive: "Is the movie part of a series? If yes, what are the other movies?",
     },
     videoGameQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
+      questionOne: "When did this video game release?",
+      questionTwo: "Who developed this game?",
+      questionThree: "How much does this game cost?",
+      questionFour: "Does the game have microtransactions? If yes, are they lootboxes?",
+      questionFive: "Is this game suitable for children?",
     },
     techQuestions: {
       questionOne: "",
@@ -44,19 +44,12 @@ function App() {
       questionFour: "",
       questionFive: "",
     },
-    anyQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
-    },
-    historyQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
+    showQuestions: {
+      questionOne: "When did this episode air?",
+      questionTwo: "How many seasons and episodes are there?",
+      questionThree: "What studio created the show?",
+      questionFour: "Where can this show be watched?",
+      questionFive: "How did the audience respond to this show?",
     },
   });
   useEffect(() => {
@@ -127,37 +120,32 @@ function App() {
           <div className="category-select-wrapper">
             <h3 className="category-select-h3">Select a Category:</h3>
             <br />
-            <span onClick={() => showForm("people")} className="filter-item">
-              People
+            <span onClick={() => showForm("contentCreator")} className="filter-item">
+              Content Creator
             </span>
             <span
-              onClick={() => showForm("videoGames")}
-              className="filter-item"
-            >
+              onClick={() => showForm("videoGames")} className="filter-item">
               Video Games
             </span>
             <span onClick={() => showForm("movies")} className="filter-item">
-              Movies/TV
+              Movies
             </span>
             <span onClick={() => showForm("tech")} className="filter-item">
               Technology
             </span>
-            <span onClick={() => showForm("history")} className="filter-item">
-              History
-            </span>
-            <span onClick={() => showForm("any")} className="filter-item">
-              Any
+            <span onClick={() => showForm("shows")} className="filter-item">
+              TV Shows/Anime
             </span>
           </div>
         </section>
-        {formToShow === "people" && (
+        {formToShow === "contentCreator" && (
           <QuestionInputForm
-            preferredQuestions={preferredQuestions.peopleQuestions}
+            preferredQuestions={preferredQuestions.contentCreatorQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={"peopleQuestions"}
-            title={"People"}
+            sectionName={"contentCreatorQuestions"}
+            title={"Content Creator"}
           />
         )}
         {formToShow === "tech" && (
@@ -177,7 +165,7 @@ function App() {
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
             sectionName={"movieQuestions"}
-            title={"Movies/TV"}
+            title={"Movies"}
           />
         )}
         {formToShow === "videoGames" && (
@@ -190,24 +178,14 @@ function App() {
             title={"Video Games"}
           />
         )}
-        {formToShow === "history" && (
+        {formToShow === "shows" && (
           <QuestionInputForm
-            preferredQuestions={preferredQuestions.videoGameQuestions}
+            preferredQuestions={preferredQuestions.showQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={"historyQuestions"}
-            title={"History"}
-          />
-        )}
-        {formToShow === "any" && (
-          <QuestionInputForm
-            preferredQuestions={preferredQuestions.anyQuestions}
-            handleInputChange={handleInputChange}
-            saveQuestions={saveQuestions}
-            clearQuestions={clearQuestions}
-            sectionName={"anyQuestions"}
-            title={"Any"}
+            sectionName={"showQuestions"}
+            title={"TV Shows/Anime"}
           />
         )}
         {showSaved ? <span>Saved successfully</span> : ""}
