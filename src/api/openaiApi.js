@@ -9,8 +9,11 @@ const generateChatCompletion = async (prompt) => {
       apiUrl,
       {
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
+        messages: [
+          {role: 'system', content: 'You are a helpful assistant that answers questions a user has regarding the key topics from the youtube video they are currently watching. Given the video title, keywords from the video, and the questions, answer to the best of your abilities. In your ressponse, provide the question number that you are answering, (1), (2), (3), (4), or (5)'},
+          { role: 'user', content: prompt }],
         temperature: 0.7,
+        max_tokens: 500,
       },
       {
         headers: {
