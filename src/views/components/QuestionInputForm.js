@@ -64,7 +64,7 @@ const QuestionInputForm = ({ preferredQuestions, handleInputChange, saveQuestion
                 </div>
                 <div className="button-container">
                     <button className="button-main submit" onClick={saveQuestions}>Submit</button>
-                    <button className="button-main clear" onClick={() => clearQuestions(sectionName)}>Clear</button>
+                    <button className="button-main clear" onClick={() => clearQuestions(sectionName)}>Return to Default</button>
                 </div>
             </div>
         </section>

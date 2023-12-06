@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import QuestionInputForm from "../components/QuestionInputForm";
 
+
 // TODO - Need to create react componenets for various parts of this page
 // place component files into src/components and import them. reference the resultsCard component for component setup
 // store user settings to chrome.storage
@@ -15,7 +16,8 @@ function App() {
   const [theme, setTheme] = useState("dark");
   const [showSaved, setShowSaved] = useState(false);
   const [formToShow, setFormToShow] = useState("");
-  const [preferredQuestions, setPreferredQuestions] = useState({
+
+  const defaultQuestions = {
     contentCreatorQuestions: {
       questionOne: "How long have they been a content creator?",
       questionTwo: "Do they have any other channels?",
@@ -38,11 +40,11 @@ function App() {
       questionFive: "Is this game suitable for children?",
     },
     techQuestions: {
-      questionOne: "",
-      questionTwo: "",
-      questionThree: "",
-      questionFour: "",
-      questionFive: "",
+      questionOne: "What is the best way to learn this technology?",
+      questionTwo: "What is this technology most often used for?",
+      questionThree: "Where can I learn more about this technology?",
+      questionFour: "What are good YouTube channels with videos related to this technology?",
+      questionFive: "Is this a difficult technology to learn?",
     },
     showQuestions: {
       questionOne: "When did this episode air?",
@@ -51,7 +53,10 @@ function App() {
       questionFour: "Where can this show be watched?",
       questionFive: "How did the audience respond to this show?",
     },
-  });
+  };
+
+  const [preferredQuestions, setPreferredQuestions] = useState(defaultQuestions);
+  
   useEffect(() => {
     // Fetch data from storage and set preferredQuestions state
     chrome.storage.local.get(["preferredQuestions"], (result) => {
@@ -59,6 +64,9 @@ function App() {
       console.log(result);
       if (storedQuestions) {
         setPreferredQuestions(storedQuestions);
+      }
+      else {
+        setPreferredQuestions(defaultQuestions);
       }
     });
   }, []);
@@ -87,14 +95,21 @@ function App() {
       setShowSaved(false);
     }, 3000);
   };
+  // const clearQuestions = (section) => {
+  //   setPreferredQuestions((prevState) => ({
+  //     ...prevState,
+  //     [section]: Object.fromEntries(
+  //       Object.keys(prevState[section]).map((key) => [key, ""])
+  //     ),
+  //   }));
+  //   console.log(preferredQuestions);
+  // };
   const clearQuestions = (section) => {
     setPreferredQuestions((prevState) => ({
       ...prevState,
-      [section]: Object.fromEntries(
-        Object.keys(prevState[section]).map((key) => [key, ""])
-      ),
+      [section]: { ...defaultQuestions[section] },
     }));
-    console.log(preferredQuestions);
+    // console.log(preferredQuestions);
   };
   const showForm = (formName) => {
     setFormToShow(formName);
@@ -108,11 +123,11 @@ function App() {
         <h1 className={`section-title ${theme}`}>Theme</h1>
         <br />
         <span className="filter-item" onClick={toggleTheme}>
-          {theme}
+          {theme === "light" ? "dark" : "light"}
         </span>
-        <span className="filter-item" onClick={toggleTheme}>
+        {/* <span className="filter-item" onClick={toggleTheme}>
           {theme}
-        </span>
+        </span> */}
       </section>
       <section className="options-prompts">
         <h2>Configure Prompts</h2>
