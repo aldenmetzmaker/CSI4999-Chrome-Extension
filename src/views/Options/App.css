@@ -102,6 +102,11 @@ h2 {
 /* Other Theme Styles */
 
 .prompts-user-set {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
   padding: 15px 50px;
   border-radius: 15px;
   box-shadow: 1px 1px 9px rgba(52, 152, 219, 0.7);

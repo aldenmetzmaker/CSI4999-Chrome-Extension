@@ -58,7 +58,7 @@ function App() {
   const [preferredQuestions, setPreferredQuestions] = useState(defaultQuestions);
   
   useEffect(() => {
-    // Fetch data from storage and set preferredQuestions state
+    // // Fetch data from storage and set preferredQuestions state
     chrome.storage.local.get(["preferredQuestions"], (result) => {
       const storedQuestions = result.preferredQuestions || null;
       console.log(result);
@@ -135,20 +135,20 @@ function App() {
           <div className="category-select-wrapper">
             <h3 className="category-select-h3">Select a Category:</h3>
             <br />
-            <span onClick={() => showForm("contentCreator")} className="filter-item">
+            <span onClick={() => showForm("contentCreator")} className={`filter-item ${formToShow === 'contentCreator' ? 'active' : ''}`}>
               Content Creator
             </span>
             <span
-              onClick={() => showForm("videoGames")} className="filter-item">
+              onClick={() => showForm("videoGames")} className={`filter-item ${formToShow === 'videoGames' ? 'active' : ''}`}>
               Video Games
             </span>
-            <span onClick={() => showForm("movies")} className="filter-item">
+            <span onClick={() => showForm("movies")} className={`filter-item ${formToShow === 'movies' ? 'active' : ''}`}>
               Movies
             </span>
-            <span onClick={() => showForm("tech")} className="filter-item">
+            <span onClick={() => showForm("tech")} className={`filter-item ${formToShow === 'tech' ? 'active' : ''}`}>
               Technology
             </span>
-            <span onClick={() => showForm("shows")} className="filter-item">
+            <span onClick={() => showForm("shows")} className={`filter-item ${formToShow === 'shows' ? 'active' : ''}`}>
               TV Shows/Anime
             </span>
           </div>
