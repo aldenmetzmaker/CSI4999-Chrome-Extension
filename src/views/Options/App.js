@@ -56,7 +56,7 @@ function App() {
   };
 
   const [preferredQuestions, setPreferredQuestions] = useState(defaultQuestions);
-  
+
   useEffect(() => {
     // Fetch data from storage and set preferredQuestions state
     chrome.storage.local.get(["preferredQuestions"], (result) => {
@@ -85,32 +85,63 @@ function App() {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
   };
-  const saveQuestions = () => {
+
+//new saveQuestions, checks if null then populates with default questions if null
+const saveQuestions = () => {
+  // Check if any questions are null or empty
+  const isAnyQuestionEmpty = Object.values(preferredQuestions).some(
+    (questions) => Object.values(questions).some((question) => !question.trim())
+  );
+
+  if (isAnyQuestionEmpty) {
+    // If any question is empty, replace with default questions
+    setPreferredQuestions(defaultQuestions);
+    console.log("Some questions were empty. Replaced with default questions:", defaultQuestions);
+  } else {
+    // Save preferred questions to chrome.storage.local
     chrome.storage.local.set({ preferredQuestions: preferredQuestions }, () => {
       console.log("Preferred questions set:", preferredQuestions);
     });
-    setShowSaved(true);
-    setTimeout(() => {
-      // Set showSaved back to false after 3 seconds
-      setShowSaved(false);
-    }, 3000);
-  };
-  // const clearQuestions = (section) => {
-  //   setPreferredQuestions((prevState) => ({
-  //     ...prevState,
-  //     [section]: Object.fromEntries(
-  //       Object.keys(prevState[section]).map((key) => [key, ""])
-  //     ),
-  //   }));
-  //   console.log(preferredQuestions);
+  }
+
+  setShowSaved(true);
+  setTimeout(() => {
+    // Set showSaved back to false after 3 seconds
+    setShowSaved(false);
+  }, 3000);
+};
+
+  // const saveQuestions = () => {
+  //   chrome.storage.local.set({ preferredQuestions: preferredQuestions }, () => {
+  //     console.log("Preferred questions set:", preferredQuestions);
+  //   });
+  //   setShowSaved(true);
+  //   setTimeout(() => {
+  //     // Set showSaved back to false after 3 seconds
+  //     setShowSaved(false);
+  //   }, 3000);
   // };
+
+//clearQuestions clears entries
   const clearQuestions = (section) => {
     setPreferredQuestions((prevState) => ({
       ...prevState,
-      [section]: { ...defaultQuestions[section] },
+      [section]: Object.fromEntries(
+        Object.keys(prevState[section]).map((key) => [key, ""])
+      ),
     }));
-    // console.log(preferredQuestions);
+    console.log(preferredQuestions);
   };
+
+  //clearQuestions returns to default questions
+  
+  // const clearQuestions = (section) => {
+  //   setPreferredQuestions((prevState) => ({
+  //     ...prevState,
+  //     [section]: { ...defaultQuestions[section] },
+  //   }));
+  //   // console.log(preferredQuestions);
+  // };
   const showForm = (formName) => {
     setFormToShow(formName);
   };
