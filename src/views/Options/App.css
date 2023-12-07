@@ -85,7 +85,10 @@ h2 {
 .filter-item:hover {
   transform: translateY(-3px);
 }
-
+.filter-item.active {
+  border: 1px solid rgb(255, 109, 109);
+  color: rgb(255, 109, 109);
+}
 
 /* Other Theme Styles */
 

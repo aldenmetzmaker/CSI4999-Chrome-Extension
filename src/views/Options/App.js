@@ -17,11 +17,11 @@ function App() {
   const [formToShow, setFormToShow] = useState('');
   const [preferredQuestions, setPreferredQuestions] = useState({
     peopleQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
+      questionOne: 'test1',
+      questionTwo: 'test2',
+      questionThree: 'test3',
+      questionFour: 'test4',
+      questionFive: 'test5',
     },
     movieQuestions: {
       questionOne: '',
@@ -120,11 +120,11 @@ function App() {
         <section className="prompts-pre-set">
           <h3 className="category-select-h3">Select a Category:</h3>
           <div className="category-select-wrapper">
-            <span onClick={() => showForm('people')} className="filter-item">People</span>
-            <span onClick={() => showForm('videoGames')} className="filter-item">Video Games</span>
-            <span onClick={() => showForm('movies')} className="filter-item">Movies/TV</span>
-            <span onClick={() => showForm('any')} className="filter-item">Any</span>
-            <span onClick={() => showForm('tech')} className="filter-item">Technology</span>
+            <span onClick={() => showForm('people')} className={`filter-item ${formToShow === 'people' ? 'active' : ''}`}>People</span>
+            <span onClick={() => showForm('videoGames')} className={`filter-item ${formToShow === 'videoGames' ? 'active' : ''}`}>Video Games</span>
+            <span onClick={() => showForm('movies')} className={`filter-item ${formToShow === 'movies' ? 'active' : ''}`}>Movies/TV</span>
+            <span onClick={() => showForm('any')} className={`filter-item ${formToShow === 'any' ? 'active' : ''}`}>Any</span>
+            <span onClick={() => showForm('tech')} className={`filter-item ${formToShow === 'tech' ? 'active' : ''}`}>Technology</span>
           </div>
         </section>
         {formToShow === 'people' && (

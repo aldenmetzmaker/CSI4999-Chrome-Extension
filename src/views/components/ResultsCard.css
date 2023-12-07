@@ -19,15 +19,16 @@
   } */
   .card-title {
     color: #e8fff1;
-    margin-bottom: 8px;
+    font-size: 17px;
+    margin-bottom: 5px;
     margin-top: 0;
   }
   
   .card-text {
-    opacity: none;
+    opacity: 1;
+    margin-top: 0;
     font-size: 14px;
     color: #e8fff1;
     overflow: auto;
-
   }
   
