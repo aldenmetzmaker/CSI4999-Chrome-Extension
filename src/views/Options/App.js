@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import QuestionInputForm from '../components/QuestionInputForm'
+import QuestionInputForm from "../components/QuestionInputForm";
+
 
 // TODO - Need to create react componenets for various parts of this page
 // place component files into src/components and import them. reference the resultsCard component for component setup
@@ -14,58 +15,58 @@ function App() {
   // state variable declaration [variableName, set function]
   const [theme, setTheme] = useState("dark");
   const [showSaved, setShowSaved] = useState(false);
-  const [formToShow, setFormToShow] = useState('');
-  const [preferredQuestions, setPreferredQuestions] = useState({
-    peopleQuestions: {
-      questionOne: 'test1',
-      questionTwo: 'test2',
-      questionThree: 'test3',
-      questionFour: 'test4',
-      questionFive: 'test5',
+  const [formToShow, setFormToShow] = useState("");
+
+  const defaultQuestions = {
+    contentCreatorQuestions: {
+      questionOne: "How long have they been a content creator?",
+      questionTwo: "Do they have any other channels?",
+      questionThree: "Do they stream?",
+      questionFour: "Do they have social media handles?",
+      questionFive: "What topics do they typcially make videos on?",
     },
     movieQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
+      questionOne: "When did this movie come out?",
+      questionTwo: "Who directed and produced this movie?",
+      questionThree: "Was this a box office success?",
+      questionFour: "What did the audience think of this movie?",
+      questionFive: "Is the movie part of a series? If yes, what are the other movies?",
     },
     videoGameQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
+      questionOne: "When did this video game release?",
+      questionTwo: "Who developed this game?",
+      questionThree: "How much does this game cost?",
+      questionFour: "Does the game have microtransactions? If yes, are they lootboxes?",
+      questionFive: "Is this game suitable for children?",
     },
     techQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
+      questionOne: "What is the best way to learn this technology?",
+      questionTwo: "What is this technology most often used for?",
+      questionThree: "Where can I learn more about this technology?",
+      questionFour: "What are good YouTube channels with videos related to this technology?",
+      questionFive: "Is this a difficult technology to learn?",
     },
-    anyQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
+    showQuestions: {
+      questionOne: "When did this episode air?",
+      questionTwo: "How many seasons and episodes are there?",
+      questionThree: "What studio created the show?",
+      questionFour: "Where can this show be watched?",
+      questionFive: "How did the audience respond to this show?",
     },
-    historyQuestions: {
-      questionOne: '',
-      questionTwo: '',
-      questionThree: '',
-      questionFour: '',
-      questionFive: '',
-    }
-  });
+  };
+
+  const [preferredQuestions, setPreferredQuestions] = useState(defaultQuestions);
+  
   useEffect(() => {
     // Fetch data from storage and set preferredQuestions state
-    chrome.storage.local.get(['preferredQuestions'], (result) => {
+    chrome.storage.local.get(["preferredQuestions"], (result) => {
       const storedQuestions = result.preferredQuestions || null;
-      console.log(result)
+      console.log(result);
       if (storedQuestions) {
         setPreferredQuestions(storedQuestions);
+      }
+      else {
+        setPreferredQuestions(defaultQuestions);
       }
     });
   }, []);
@@ -76,8 +77,8 @@ function App() {
       [section]: {
         ...prevState[section],
         [fieldName]: event.target.value,
-      }
-    }))
+      },
+    }));
   };
   // gets called when input element is changed, and updates state. this dynamically sets the css class
   const toggleTheme = () => {
@@ -86,7 +87,7 @@ function App() {
   };
   const saveQuestions = () => {
     chrome.storage.local.set({ preferredQuestions: preferredQuestions }, () => {
-      console.log('Preferred questions set:', preferredQuestions);
+      console.log("Preferred questions set:", preferredQuestions);
     });
     setShowSaved(true);
     setTimeout(() => {
@@ -94,14 +95,21 @@ function App() {
       setShowSaved(false);
     }, 3000);
   };
+  // const clearQuestions = (section) => {
+  //   setPreferredQuestions((prevState) => ({
+  //     ...prevState,
+  //     [section]: Object.fromEntries(
+  //       Object.keys(prevState[section]).map((key) => [key, ""])
+  //     ),
+  //   }));
+  //   console.log(preferredQuestions);
+  // };
   const clearQuestions = (section) => {
     setPreferredQuestions((prevState) => ({
       ...prevState,
-      [section]: Object.fromEntries(
-        Object.keys(prevState[section]).map((key) => [key, ''])
-      ),
+      [section]: { ...defaultQuestions[section] },
     }));
-    console.log(preferredQuestions)
+    // console.log(preferredQuestions);
   };
   const showForm = (formName) => {
     setFormToShow(formName);
@@ -113,71 +121,89 @@ function App() {
       </header>
       <section className="theme-form">
         <h1 className={`section-title ${theme}`}>Theme</h1>
-        <span className="filter-item" onClick={toggleTheme}>{theme}</span>
+        <br />
+        <span className="filter-item" onClick={toggleTheme}>
+          {theme === "light" ? "dark" : "light"}
+        </span>
+        {/* <span className="filter-item" onClick={toggleTheme}>
+          {theme}
+        </span> */}
       </section>
       <section className="options-prompts">
         <h2>Configure Prompts</h2>
         <section className="prompts-pre-set">
-          <h3 className="category-select-h3">Select a Category:</h3>
           <div className="category-select-wrapper">
-            <span onClick={() => showForm('people')} className={`filter-item ${formToShow === 'people' ? 'active' : ''}`}>People</span>
-            <span onClick={() => showForm('videoGames')} className={`filter-item ${formToShow === 'videoGames' ? 'active' : ''}`}>Video Games</span>
-            <span onClick={() => showForm('movies')} className={`filter-item ${formToShow === 'movies' ? 'active' : ''}`}>Movies/TV</span>
-            <span onClick={() => showForm('any')} className={`filter-item ${formToShow === 'any' ? 'active' : ''}`}>Any</span>
-            <span onClick={() => showForm('tech')} className={`filter-item ${formToShow === 'tech' ? 'active' : ''}`}>Technology</span>
+            <h3 className="category-select-h3">Select a Category:</h3>
+            <br />
+            <span onClick={() => showForm("contentCreator")} className="filter-item">
+              Content Creator
+            </span>
+            <span
+              onClick={() => showForm("videoGames")} className="filter-item">
+              Video Games
+            </span>
+            <span onClick={() => showForm("movies")} className="filter-item">
+              Movies
+            </span>
+            <span onClick={() => showForm("tech")} className="filter-item">
+              Technology
+            </span>
+            <span onClick={() => showForm("shows")} className="filter-item">
+              TV Shows/Anime
+            </span>
           </div>
         </section>
-        {formToShow === 'people' && (
+        {formToShow === "contentCreator" && (
           <QuestionInputForm
-            preferredQuestions={preferredQuestions.peopleQuestions}
+            preferredQuestions={preferredQuestions.contentCreatorQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={'peopleQuestions'}
-            title={'People'}
+            sectionName={"contentCreatorQuestions"}
+            title={"Content Creator"}
           />
         )}
-        {formToShow === 'tech' && (
+        {formToShow === "tech" && (
           <QuestionInputForm
             preferredQuestions={preferredQuestions.techQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={'techQuestions'}
-            title={'Technology'}
+            sectionName={"techQuestions"}
+            title={"Technology"}
           />
         )}
-        {formToShow === 'movies' && (
+        {formToShow === "movies" && (
           <QuestionInputForm
             preferredQuestions={preferredQuestions.movieQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={'movieQuestions'}
-            title={'Movies/TV'}
+            sectionName={"movieQuestions"}
+            title={"Movies"}
           />
         )}
-        {formToShow === 'videoGames' && (
+        {formToShow === "videoGames" && (
           <QuestionInputForm
             preferredQuestions={preferredQuestions.videoGameQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={'videoGameQuestions'}
-            title={'Video Games'}
+            sectionName={"videoGameQuestions"}
+            title={"Video Games"}
           />
         )}
-        {formToShow === 'any' && (
+        {formToShow === "shows" && (
           <QuestionInputForm
-            preferredQuestions={preferredQuestions.anyQuestions}
+            preferredQuestions={preferredQuestions.showQuestions}
             handleInputChange={handleInputChange}
             saveQuestions={saveQuestions}
             clearQuestions={clearQuestions}
-            sectionName={'anyQuestions'}
-            title={'Any'}
+            sectionName={"showQuestions"}
+            title={"TV Shows/Anime"}
           />
         )}
-        {showSaved ? (<span>Saved successfully</span>) : ('')}
+        {showSaved ? <span>Saved successfully</span> : ""}
       </section>
     </div>
   );

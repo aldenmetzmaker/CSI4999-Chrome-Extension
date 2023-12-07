@@ -5,7 +5,7 @@ import './QuestionInputForm.css'
 const QuestionInputForm = ({ preferredQuestions, handleInputChange, saveQuestions, clearQuestions, sectionName, title }) => {
     return (
         <section className="prompts-user-set">
-            <h2>Set Custom Prompts for: {title}</h2>
+            <h2>Set Custom Prompts For: {title}</h2>
             <div>
                 <div className="input-wrapper">
                     <label htmlFor={'questionOne'} className="prompt-input-label">Preferred Question 1:</label>
@@ -64,7 +64,7 @@ const QuestionInputForm = ({ preferredQuestions, handleInputChange, saveQuestion
                 </div>
                 <div className="button-container">
                     <button className="button-main submit" onClick={saveQuestions}>Submit</button>
-                    <button className="button-main clear" onClick={() => clearQuestions(sectionName)}>Clear</button>
+                    <button className="button-main clear" onClick={() => clearQuestions(sectionName)}>Return to Default</button>
                 </div>
             </div>
         </section>
