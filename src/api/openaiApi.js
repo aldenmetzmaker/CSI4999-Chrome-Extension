@@ -9,8 +9,11 @@ const generateChatCompletion = async (prompt) => {
       apiUrl,
       {
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
+        messages: [
+          {role: 'system', content: 'You are a helpful assistant that answers questions a user has regarding the key topics from the youtube video they are currently watching. Given the video title, key topics from the video, and the questions, answer to the best of your abilities and be sure to include insightful information about the topics. provide your response only in JSON format, with the following Schema, {"one": "<answer>", "two": "<answer>", "three": "<answer>", "four": "<answer>", "five": "<answer>"}'},
+          { role: 'user', content: prompt }],
         temperature: 0.7,
+        max_tokens: 1000,
       },
       {
         headers: {
@@ -20,7 +23,7 @@ const generateChatCompletion = async (prompt) => {
       }
     );
 
-    return response.data.choices[0].message.content;
+    return JSON.parse(response.data.choices[0].message.content);
   } catch (error) {
     console.error('Error making API request:', error);
     throw error;

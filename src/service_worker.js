@@ -34,7 +34,11 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
           chrome.storage.local.set({ "apiResponse": data.items }).then(() => {
           console.log("Response has been stored.", data.items);
           });
-          //chrome.runtime.sendMessage({ data });
+          try {
+          chrome.runtime.sendMessage({ data });
+          }catch(err){
+            console.error("error sending message: ", err);
+          }
         })
         .then(keyTag => { 
           chrome.storage.local.get(["apiResponse"]).then((result) => {
@@ -42,6 +46,12 @@ chrome.webNavigation.onHistoryStateUpdated.addListener((details) => {
             if (result.apiResponse[0].snippet.tags){
               keyTag = tagAlgorithm(result.apiResponse[0].snippet.tags, result.apiResponse[0].snippet.title);
               console.log("Response from tagAlgorithm", keyTag);
+              chrome.storage.local.set({ "keywords": keyTag});
+              try {
+                chrome.runtime.sendMessage({ keyTag });
+                }catch(err){
+                  console.error("error sending message: ", err);
+                }
             }
             else {
               // need to add functionality for when no tags are present. video title, video description? something to put it the openai request
