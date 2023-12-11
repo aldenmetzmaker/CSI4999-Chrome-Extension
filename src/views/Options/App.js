@@ -80,6 +80,7 @@ function App() {
       },
     }));
   };
+
   // gets called when input element is changed, and updates state. this dynamically sets the css class
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -95,8 +96,20 @@ const saveQuestions = () => {
 
   if (isAnyQuestionEmpty) {
     // If any question is empty, replace with default questions
-    setPreferredQuestions(defaultQuestions);
-    console.log("Some questions were empty. Replaced with default questions:", defaultQuestions);
+    const questionsWithDefaults = Object.keys(preferredQuestions).reduce((acc, section) => {
+      acc[section] = Object.fromEntries(
+        Object.keys(preferredQuestions[section]).map((key) => [key, preferredQuestions[section][key] || defaultQuestions[section][key]])
+      );
+      return acc;
+    }, {});
+
+    setPreferredQuestions(questionsWithDefaults);
+    console.log("Some questions were empty. Replaced with default questions:", questionsWithDefaults);
+
+    // Save preferred questions with defaults to chrome.storage.local
+    chrome.storage.local.set({ preferredQuestions: questionsWithDefaults }, () => {
+      console.log("Preferred questions set:", questionsWithDefaults);
+    });
   } else {
     // Save preferred questions to chrome.storage.local
     chrome.storage.local.set({ preferredQuestions: preferredQuestions }, () => {
@@ -110,17 +123,8 @@ const saveQuestions = () => {
     setShowSaved(false);
   }, 3000);
 };
+  
 
-  // const saveQuestions = () => {
-  //   chrome.storage.local.set({ preferredQuestions: preferredQuestions }, () => {
-  //     console.log("Preferred questions set:", preferredQuestions);
-  //   });
-  //   setShowSaved(true);
-  //   setTimeout(() => {
-  //     // Set showSaved back to false after 3 seconds
-  //     setShowSaved(false);
-  //   }, 3000);
-  // };
 
 //clearQuestions clears entries
   const clearQuestions = (section) => {
@@ -133,18 +137,10 @@ const saveQuestions = () => {
     console.log(preferredQuestions);
   };
 
-  //clearQuestions returns to default questions
-  
-  // const clearQuestions = (section) => {
-  //   setPreferredQuestions((prevState) => ({
-  //     ...prevState,
-  //     [section]: { ...defaultQuestions[section] },
-  //   }));
-  //   // console.log(preferredQuestions);
-  // };
   const showForm = (formName) => {
     setFormToShow(formName);
   };
+
   return (
     <div className={`options ${theme}`}>
       <header className="options-header">
@@ -156,9 +152,6 @@ const saveQuestions = () => {
         <span className="filter-item" onClick={toggleTheme}>
           {theme === "light" ? "dark" : "light"}
         </span>
-        {/* <span className="filter-item" onClick={toggleTheme}>
-          {theme}
-        </span> */}
       </section>
       <section className="options-prompts">
         <h2>Configure Prompts</h2>
