@@ -17,6 +17,7 @@
     "react-color-palette": "^7.1.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "swiper": "^11.0.5",
     "typescript": "^3.9.10"
   },
   "scripts": {

@@ -76,6 +76,8 @@ h2 {
 .category-select-wrapper {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding: 15px 50px;
   box-shadow: 1px 1px 9px rgba(52, 152, 219, 0.7);
   border-radius: 15px;
@@ -92,10 +94,19 @@ h2 {
 .filter-item:hover {
   transform: translateY(-3px);
 }
+.filter-item.active {
+  border: 1px solid rgb(255, 109, 109);
+  color: rgb(255, 109, 109);
+}
 
 /* Other Theme Styles */
 
 .prompts-user-set {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
   padding: 15px 50px;
   border-radius: 15px;
   box-shadow: 1px 1px 9px rgba(52, 152, 219, 0.7);
