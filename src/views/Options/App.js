@@ -70,6 +70,27 @@ function App() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch theme preference from storage
+        const result = await new Promise((resolve) => {
+          chrome.storage.local.get(["theme"], resolve);
+        });
+  
+        const storedTheme = result.theme || "dark"; // Default to "dark" if theme is not stored
+  
+        setTheme(storedTheme);
+      } catch (error) {
+        console.error("Error fetching theme preference:", error);
+        // Handle the error as needed (e.g., use a default theme)
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
   const handleInputChange = (section, fieldName, event) => {
     // Update the state with the new value
     setPreferredQuestions((prevState) => ({
@@ -85,7 +106,13 @@ function App() {
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
+  
+    // Save the theme preference to chrome.storage.local
+    chrome.storage.local.set({ theme: newTheme }, () => {
+      console.log("Theme preference saved:", newTheme);
+    });
   };
+  
 
 //new saveQuestions, checks if null then populates with default questions if null
 const saveQuestions = () => {
