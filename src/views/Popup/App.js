@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "./App.css";
 import ResultsCard from "../components/ResultsCard";
-import generateChatCompletion from '../../api/openaiApi.js';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import generateChatCompletion from "../../api/openaiApi.js";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 class App extends React.Component {
   state = {
     videos: [],
@@ -15,7 +15,7 @@ class App extends React.Component {
     videoData: null,
     videoTitle: null,
     prompt: null,
-    keywords: ['', '', ''],
+    keywords: ["", "", ""],
     storedOpenaiResponse: null,
     openAIResponse: {
       questionOne: null,
@@ -23,51 +23,50 @@ class App extends React.Component {
       questionThree: null,
       questionFour: null,
       questionFive: null,
-
     },
     userQuestions: {
       peopleQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
       },
       movieQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
       },
       videoGameQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
       },
       techQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
       },
       anyQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
       },
       historyQuestions: {
-        questionOne: '',
-        questionTwo: '',
-        questionThree: '',
-        questionFour: '',
-        questionFive: '',
-      }
+        questionOne: "",
+        questionTwo: "",
+        questionThree: "",
+        questionFour: "",
+        questionFive: "",
+      },
     },
     videoCategory: null,
   };
@@ -87,7 +86,7 @@ class App extends React.Component {
     chrome.storage.local.get(["openaiResponse"], (result) => {
       const response = result.openaiResponse;
       console.log("Retrieved video ID:", response);
-      this.setState({ storedOpenaiResponse: response, }, () => {
+      this.setState({ storedOpenaiResponse: response }, () => {
         console.log("Updated response state:", this.state.storedOpenaiResponse);
       });
     });
@@ -100,7 +99,6 @@ class App extends React.Component {
         console.log("Updated videoId state:", this.state.videoCategory);
       });
     });
-
 
     // Listen for messages from the background script
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -119,16 +117,13 @@ class App extends React.Component {
             );
           }
         );
-      } else if(message.keyTag) {
+      } else if (message.keyTag) {
         this.setState(
           {
             keywords: message.keyTag,
           },
           () => {
-            console.log(
-              "Updated keywords state:",
-              this.state.keywords,
-            );
+            console.log("Updated keywords state:", this.state.keywords);
           }
         );
       }
@@ -137,29 +132,30 @@ class App extends React.Component {
     // Retrieve videoData from chrome.storage.local
     const youtubeResult = await chrome.storage.local.get(["apiResponse"]);
     const youtubeData = youtubeResult.apiResponse;
-    this.setState(
-      {
-        videoData: youtubeData,
-        videoTitle: youtubeData[0].snippet.title,
-      }
-    );
+    this.setState({
+      videoData: youtubeData,
+      videoTitle: youtubeData[0].snippet.title,
+    });
     const keyTagsResult = await chrome.storage.local.get(["keywords"]);
     const tags = keyTagsResult.keywords;
     this.setState({ keywords: tags }, () => {
       console.log("Updated keywords state:", this.state.keywords);
     });
-    const preferredQuestionsResult = await chrome.storage.local.get(["preferredQuestions"]);
+    const preferredQuestionsResult = await chrome.storage.local.get([
+      "preferredQuestions",
+    ]);
     const questions = preferredQuestionsResult.preferredQuestions;
     console.log("Retrieved questions:", questions);
     this.setState({ userQuestions: questions }, () => {
       console.log("Updated questions state:", this.state.userQuestions);
-      if (this.state.storedOpenaiResponse.videoId !== this.state.videoId){
-        this.handleSubmit();
-      }
-      else {
-        this.setState({ openAIResponse: this.state.storedOpenaiResponse})
-        this.setState({ loading: false });
-      }
+      // if (this.state.storedOpenaiResponse.videoId !== this.state.videoId){
+      //   this.handleSubmit();
+      // }
+      // else {
+      //   this.setState({ openAIResponse: this.state.storedOpenaiResponse})
+      //   this.setState({ loading: false });
+      // }
+      this.handleSubmit();
     });
   }
   handleOptionsPageClick = () => {
@@ -179,21 +175,21 @@ class App extends React.Component {
       questionFive,
     } = this.state.userQuestions.techQuestions;
     const prompt = `Video title: ${this.state.videoTitle}, key topics: ${this.state.keywords[0]},  ${this.state.keywords[1]},  ${this.state.keywords[2]}, Questions: (1) ${questionOne} (2) ${questionTwo} (3) ${questionThree} (4) ${questionFour} (5) ${questionFive}`;
-    let completion
+    let completion;
     try {
       completion = await generateChatCompletion(prompt);
-      this.setState({ openAIResponse: completion })
+      this.setState({ openAIResponse: completion });
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
     completion.videoId = this.state.videoId;
     chrome.storage.local.set({ openaiResponse: completion }, () => {
-      console.log('openai answers set:', completion);
+      console.log("openai answers set:", completion);
     });
-    
-    console.log(this.state.userQuestions.techQuestions)
+
+    console.log(this.state.userQuestions.techQuestions);
     console.log(prompt);
-    console.log(completion)
+    console.log(completion);
     this.setState({ loading: false });
   };
 
@@ -202,15 +198,9 @@ class App extends React.Component {
       <div className="popup">
         <header className="popup-header">
           <h2 className="popup-title">Click Search - Key Topics:</h2>
-          <span className="tag-item">
-            {this.state.keywords[0]}
-          </span>
-          <span className="tag-item">
-            {this.state.keywords[1]}
-          </span>
-          <span className="tag-item">
-            {this.state.keywords[2]}
-          </span>
+          <span className="tag-item">{this.state.keywords[0]}</span>
+          <span className="tag-item">{this.state.keywords[1]}</span>
+          <span className="tag-item">{this.state.keywords[2]}</span>
           <button
             onClick={this.handleOptionsPageClick}
             className="options-page-button"
@@ -219,7 +209,6 @@ class App extends React.Component {
           </button>
         </header>
         {!this.state.loading ? (
-
           <div className="results">
             <Swiper
               modules={[Autoplay, Navigation, Pagination]}
@@ -238,27 +227,32 @@ class App extends React.Component {
                 <ResultsCard
                   title={this.state.userQuestions.techQuestions.questionOne}
                   text={this.state.openAIResponse.one}
-                /></SwiperSlide>
+                />
+              </SwiperSlide>
               <SwiperSlide>
                 <ResultsCard
                   title={this.state.userQuestions.techQuestions.questionTwo}
                   text={this.state.openAIResponse.two}
-                /></SwiperSlide>
+                />
+              </SwiperSlide>
               <SwiperSlide>
                 <ResultsCard
                   title={this.state.userQuestions.techQuestions.questionThree}
                   text={this.state.openAIResponse.three}
-                /></SwiperSlide>
+                />
+              </SwiperSlide>
               <SwiperSlide>
                 <ResultsCard
                   title={this.state.userQuestions.techQuestions.questionFour}
                   text={this.state.openAIResponse.four}
-                /></SwiperSlide>
+                />
+              </SwiperSlide>
               <SwiperSlide>
                 <ResultsCard
                   title={this.state.userQuestions.techQuestions.questionFive}
                   text={this.state.openAIResponse.five}
-                /></SwiperSlide>
+                />
+              </SwiperSlide>
             </Swiper>
           </div>
         ) : (
