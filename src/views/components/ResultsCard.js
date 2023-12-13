@@ -1,11 +1,11 @@
 import React from 'react';
 import './ResultsCard.css';
 
-function ResultsCard({ title, text }) {
+function ResultsCard({ title, text, theme }) {
   return (
-    <div className='results-card'>
-      <h2 className='card-title text--md'>{title}</h2>
-      <p className='card-text'>{text}</p>
+    <div className={`results-card ${theme}`}>
+      <h2 className={`card-title text--md ${theme}`}>{title}</h2>
+      <p className={`card-text ${theme}`}>{text}</p>
     </div>
   );
 }

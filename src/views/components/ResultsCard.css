@@ -1,7 +1,7 @@
 /* ResultsCard.css */
 .results-card {
     max-width: 470px;
-    max-height: 150px;
+    max-height: 250px;
     padding: 5px 10px 10px 15px;
     margin-right: 20px;
     box-shadow: 1px 1px 9px rgba(52, 152, 219, 0.7);
@@ -13,22 +13,38 @@
     margin-left: 15px;
     transition: transform 0.1s ease-in-out 0.1s;
   }
+  .results-card.light {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .results-card.dark{
+    background-color: #394045;
+  }
   /* .results-card:hover {
     transform: scale(1.05, 1.05);
     cursor: pointer;
   } */
   .card-title {
-    color: #e8fff1;
     font-size: 17px;
     margin-bottom: 5px;
     margin-top: 0;
+  }
+  .card-title.dark {
+    color: #e8fff1;
+  }
+  .card-title.light {
+    color: #333;
   }
   
   .card-text {
     opacity: 1;
     margin-top: 0;
     font-size: 14px;
-    color: #e8fff1;
     overflow: auto;
   }
-  
+  .card-text.light {
+    color: #333;
+  }
+  .card-text.dark {
+    color: #e8fff1;
+  }

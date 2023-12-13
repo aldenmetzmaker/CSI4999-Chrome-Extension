@@ -117,18 +117,18 @@ function tagAlgorithm(tagArray, title, channel, categoryId)
   {
     techPoints = techPoints + 100;
   }
-  else if (categoryId == 23 || categoryId == 27 || categoryId == 26 ||
-  categoryId == 25 || categoryId == 10 || categoryId == 29 || categoryId == 22
-  || categoryId == 15 || categoryId == 17 || categoryId == 19)
-  {
-    //Return only the name of the channel if the video is a category unrelated to our chosen categories and exit the algorithm early
-    returnArray[0] = "empty";
-    returnArray[1] = "empty";
-    returnArray[2] = channel;
-    returnArray[3] = "n/a";
+  // else if (categoryId == 23 || categoryId == 27 || categoryId == 26 ||
+  // categoryId == 25 || categoryId == 10 || categoryId == 29 || categoryId == 22
+  // || categoryId == 15 || categoryId == 17 || categoryId == 19)
+  // {
+  //   //Return only the name of the channel if the video is a category unrelated to our chosen categories and exit the algorithm early
+  //   returnArray[0] = "empty";
+  //   returnArray[1] = "empty";
+  //   returnArray[2] = channel;
+  //   returnArray[3] = "n/a";
 
-    return returnArray;
-  }
+  //   return returnArray;
+  // }
 
   //Compare the video title with category keywords
 
